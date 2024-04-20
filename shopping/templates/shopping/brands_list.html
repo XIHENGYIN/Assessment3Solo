@@ -1,0 +1,18 @@
+<!-- Brands in Category Template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brands in {{ category.CategoryName }}</title>
+</head>
+<body>
+    <h1>Brands in {{ category.CategoryName }}</h1>
+    <ul>
+        {% for brand in brands %}
+            <li>{{ brand.BrandName }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'categories_list' %}">Back to Categories</a>
+</body>
+</html>
