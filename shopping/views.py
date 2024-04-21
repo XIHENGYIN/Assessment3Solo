@@ -1,19 +1,22 @@
-from django.shortcuts import render,get_object_or_404
-from .models import Category, Brand,ProductDetail
+from django.shortcuts import render, get_object_or_404
+from .models import Brand, Category, Product
+import json
 
-def categories_list(request):
-    categories = Category.objects.all()  # 更改变量名以反映其内容
-    return render(request, 'shopping/categories_list.html', {'categories': categories})
+def brand_list(request):
+    brands = Brand.objects.all()
+    return render(request, 'shopping/brands_list.html', {'brands': brands})
 
-def category_detail(request, category_id):
+def category_list(request, brand_id):
+    brand = get_object_or_404(Brand, id=brand_id)
+    categories = brand.categories.all()
+    return render(request, 'shopping/categories_list.html', {'brand': brand, 'categories': categories})
+
+def product_list(request, category_id):
     category = get_object_or_404(Category, id=category_id)
-    brands = Brand.objects.filter(category=category)
-    return render(request, 'shopping/brands_list.html', {'category': category, 'brands': brands})
+    products = category.products.all()
+    return render(request, 'shopping/products_detail.html', {'category': category, 'products': products})
 
-
-def brand_details(request, brand_id):
-    brand = get_object_or_404(Brand, id=brand_id)  # 确保 Brand 模型中有 brand_id 字段
-    products = ProductDetail.objects.filter(brand=brand)  
-    return render(request, 'shopping/brand_details.html', {'brand': brand, 'products': products})
-
+def product_price_chart(request, product_id):
+    product = get_object_or_404(Product, product_id=product_id)
+    return render(request, 'shopping/product_price_chart.html', {'product': product})
 
