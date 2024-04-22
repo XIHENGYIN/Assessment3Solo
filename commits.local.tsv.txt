@@ -1,3 +1,5 @@
+41f6cea	XIHENG YIN	Mon Apr 22 20:31:35 2024	add admin Add administrator, user login registration page
+b53208a	XIHENG YIN	Sun Apr 21 10:08:04 2024	add log
 bc0f41e	XIHENG YIN	Sun Apr 21 10:06:57 2024	Add price visualisation list, update model, view, update csv file and re-import it.
 2c0d09a	XIHENG YIN	Sat Apr 20 07:53:09 2024	Add the log
 2a788cc	XIHENG YIN	Sat Apr 20 07:51:17 2024	Modify model and view
