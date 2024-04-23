@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #5c67f2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'shopping:brand_list' %}">Home</a> | 
+        <a href="{% url 'shopping:view_cart' %}">View Cart</a>
+    </nav>
+    <h1>Your Shopping Cart</h1>
+    {% if cart %}
+    <ul>
+        {% for item in cart.items.all %}
+        <li>
+            <span>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.price | floatformat:2 }} {{ item.product.currency }}</span>
+            <a href="{% url 'shopping:remove_from_cart' item.id %}">Remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: {{ cart.total_price | floatformat:2 }} {{ cart.items.first.product.currency }}</p>
+    {% else %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

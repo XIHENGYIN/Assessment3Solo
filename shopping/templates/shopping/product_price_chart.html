@@ -9,10 +9,10 @@
         body {
             padding: 20px;
             font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
         }
-        .chart-container {
-            width: 100%; /* Full width of the container */
-            height: 500px; /* Increased height of the chart container */
+        .container {
+            max-width: 800px;
             margin: auto;
         }
         .info {
@@ -25,9 +25,36 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .chart-container {
+            width: 100%; /* Full width of the container */
+            height: 600px; /* Increased height of the chart container */
+            margin: auto;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+        }
+        .navbar-brand {
+            color: #fff;
+            font-size: 18px;
+            padding: 0.5rem 1rem;
+        }
+        .navbar-nav {
+            gap: 20px;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            padding: 0.5rem 1rem;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'shopping:brand_list' %}">Home</a>
+            <a class="navbar-brand" href="{% url 'shopping:view_cart' %}">View Cart</a>
+        </div>
+    </nav>
     <div class="container">
         <div class="info">
             <h1>{{ product.name }}</h1>

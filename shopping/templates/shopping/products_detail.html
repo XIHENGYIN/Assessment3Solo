@@ -1,18 +1,116 @@
-<!-- products_detail.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product List</title>
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        .product-name {
+            font-size: 18px; /* Larger font for product name */
+            font-weight: bold;
+            color: #333;
+        }
+
+        .description {
+            font-style: italic;
+            margin-top: 5px; /* Visual space between name and description */
+            color: #555;
+        }
+
+        a {
+            color: #5c67f2;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block; /* Ensures proper spacing around the link */
+            margin-right: 10px; /* Add some space between links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-input {
+            padding: 12px; /* Increased padding for a larger input */
+            width: 400px; /* Increased width for a larger input */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-right: 10px; /* Add some margin to separate input and button */
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <a href="{% url 'shopping:brand_list' %}">Home</a> | 
+        <a href="{% url 'shopping:view_cart' %}">View Cart</a>
+    </nav>
+    <div class="search-container">
+        <form action="{% url 'shopping:search_products' %}" method="get">
+            <input type="text" placeholder="Search by ID, description, or price" name="query" class="search-input"> <!-- Added class for styling -->
+            <button type="submit" class="search-button">Search</button> <!-- Added class for styling -->
+        </form>
+    </div>
     <h1>Products for {{ category.name }}</h1>
     <ul>
         {% for product in products %}
         <li>
-            {{ product.name }} - {{ product.description }}
-            <!-- 添加超链接到价格图表页面 -->
+            <span class="product-name">{{ product.name }}</span>
+            <div class="description">{{ product.description }}</div>
             <a href="{% url 'shopping:product_price_chart' product_id=product.product_id %}">View Price Chart</a>
+            <a href="{% url 'shopping:add_to_cart' product_id=product.product_id %}" class="add-to-cart">Add to Cart</a>
         </li>
         {% endfor %}
     </ul>

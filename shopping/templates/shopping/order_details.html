@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Category List</title>
+    <title>Order Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,29 +33,21 @@
             list-style-type: none;
             padding: 0;
             text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
+            max-width: 800px;
+            margin: 20px auto;
         }
 
         li {
-            margin-bottom: 20px;
-            margin-right: 20px;
-        }
-
-        li a {
-            text-decoration: none;
-            color: #333;
             background-color: #fff;
-            padding: 10px 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
             border-radius: 5px;
-            display: inline-block;
-            font-size: 18px;
         }
 
-        li a:hover {
-            background-color: #ddd;
+        p {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -64,11 +56,18 @@
         <a href="{% url 'shopping:brand_list' %}">Home</a> | 
         <a href="{% url 'shopping:view_cart' %}">View Cart</a>
     </nav>
-    <h1>Categories for {{ brand.name }}</h1>
+    <h1>Order Details</h1>
+    {% if order %}
     <ul>
-        {% for category in categories %}
-            <li><a href="{% url 'shopping:product_list' category_id=category.id %}">{{ category.name }}</a></li>
+        {% for item in order.items.all %}
+        <li>
+            {{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.price | floatformat:2 }} {{ item.product.currency }}
+        </li>
         {% endfor %}
     </ul>
+    <p>Total Price: {{ order.total_price | floatformat:2 }} {{ order.items.first.product.currency }}</p>
+    {% else %}
+    <p>{{ message }}</p>
+    {% endif %}
 </body>
 </html>

@@ -1,11 +1,60 @@
-<!-- accounts/templates/accounts/register.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* 统一字体风格 */
+            background-color: #f4f4f9; /* 轻灰色背景，舒适的视觉体验 */
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333; /* 标题使用深灰色 */
+        }
+        form {
+            background: white;
+            max-width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1); /* 给表单添加细微的阴影 */
+            border-radius: 8px; /* 表单的圆角边框 */
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #666; /* 标签使用中灰色 */
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd; /* 输入框使用浅灰色边框 */
+            border-radius: 4px; /* 输入框的轻微圆角 */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5c67f2; /* 使用柔和的蓝色为按钮 */
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #5058e5; /* 鼠标悬停时按钮颜色加深 */
+        }
+        a {
+            color: #5c67f2; /* 链接颜色与按钮保持一致 */
+            text-decoration: none; /* 去除下划线 */
+        }
+        a:hover {
+            text-decoration: underline; /* 鼠标悬停时出现下划线，提高可点击性的视觉反馈 */
+        }
+    </style>
 </head>
 <body>
     <h2>Register</h2>
@@ -17,4 +66,3 @@
     <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
 </body>
 </html>
-    
