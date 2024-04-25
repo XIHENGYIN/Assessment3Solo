@@ -22,56 +22,56 @@ def product_price_chart(request, product_id):
     return render(request, 'shopping/product_price_chart.html', {'product': product})
 
 def search_brand(request):
-    query = request.GET.get('query', '').strip()  # 获取搜索关键词并去除首尾空格
+    query = request.GET.get('query', '').strip()  # Get search terms and remove first and last spaces
     if query:
-        # 不区分大小写地查询品牌名称或首字母包含搜索关键词的品牌
+        # Case-insensitive lookup of brands with brand names or initials that contain search terms
         brands = Brand.objects.filter(name__icontains=query) | Brand.objects.filter(name__istartswith=query)
     else:
-        brands = Brand.objects.all()  # 如果没有搜索关键词，则显示所有品牌
+        brands = Brand.objects.all()  # If there are no search terms, all brands are displayed
     return render(request, 'shopping/brands_list.html', {'brands': brands})
 
 def search_products(request):
     query = request.GET.get('query', '').strip()
-    if query.isdigit():  # 如果查询是数字，假定它是产品 ID
-        products = Product.objects.filter(id=query)  # 按 ID 查找
-    else:  # 否则按描述查找
+    if query.isdigit():  
+        products = Product.objects.filter(id=query)  # Find by ID
+    else:  # Otherwise look by description
         products = Product.objects.filter(description__icontains=query)
 
     return render(request, 'shopping/products_detail.html', {'products': products})
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, product_id=product_id)
-    # 尝试获取用户的最新订单，这里我们暂时假设最新的订单是未完成的
+    # Try to get the user's latest order
     last_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
-    if last_order and not last_order.items.exists():  # 检查最新订单是否有订单项
+    if last_order and not last_order.items.exists():  # Check latest orders for order items
         order = last_order
     else:
-        # 如果没有未完成的订单，创建新订单
+        # If there are no outstanding orders, create a new order
         order = Order.objects.create(user=request.user, total_price=0)
     
     order_item, created = OrderItem.objects.get_or_create(order=order, product=product, defaults={'price': product.sell_price})
     if not created:
         order_item.quantity += 1
-        order_item.price = product.sell_price * order_item.quantity  # 更新单个订单项的价格
+        order_item.price = product.sell_price * order_item.quantity  # Update prices for individual order items
         order_item.save()
     
-    order.total_price += product.sell_price  # 更新订单总价
+    order.total_price += product.sell_price  # Update order total price
     order.save()
     
     return redirect('shopping:order_details')
 
 def order_details(request):
-    # 获取用户的最新订单
+    # Get user's latest order
     order = Order.objects.filter(user=request.user).order_by('-created_at').first()
     if order:
         return render(request, 'shopping/order_details.html', {'order': order})
     else:
-        # 如果没有订单，返回一个空订单页面或消息
+        # If there are no orders, return an empty order page or message
         return render(request, 'shopping/order_details.html', {'message': 'No active orders found.'})
 
 
 def view_cart(request):
-    # 尝试获取用户的当前购物车，这里我们假设最新的订单是当前的购物车
+    # Try to get the user's current shopping cart
     cart = Order.objects.filter(user=request.user).order_by('-created_at').first()
     if cart and cart.items.exists():
         return render(request, 'shopping/cart_details.html', {'cart': cart})

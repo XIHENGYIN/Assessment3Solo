@@ -17,7 +17,7 @@ class Product(models.Model):
     size = models.CharField(max_length=50)
     currency = models.CharField(max_length=10)
     sell_price = models.DecimalField(max_digits=10, decimal_places=2)
-    original_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)  # 允许空值
+    original_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)  #Allow Null Value
     discount = models.TextField()
 
 class Order(models.Model):
