@@ -13,25 +13,41 @@ This web application allows users to register and log in to access a variety of 
 How to start it
 ----------------
 1. Clone the repository:
+   ```
+   git clone git@github.com:XIHENGYIN/Assessment3Solo.git
+   ```
+   
 2. Navigate to the project directory:
+   ```
    cd Assessment3Solo
-  
+   ```
+
+
 3. Set the python version and create and activate the virtual environment：
-  
-pyenv local 3.10.7
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
+   ```
+   pyenv local 3.10.7 # this sets the local version of python to 3.10.7
+   python3 -m venv .venv # this creates the virtual environment for you
+   source .venv/bin/activate # this activates the virtual environment
+   pip install --upgrade pip # this installs pip, and upgrades it if required.
+   ```
 
 4. Install Django:
+   ```
    pip install Django==4.1.0
+   ```
+6. Generate migration files and apply them:
+   ```
+   python3 manage.py makemigrations
+   python3 manage.py migrate
+   ```
+   •	 When you modify the model (Model) or add a new application (App) in the Django project usually involves changes to the database schema, in the future if you need to modify, for example, the following: create    a  new table, modify the fields, add indexes, etc. you need to run the above code.
 
-5. Generate migration files and apply them:
-python3 manage.py makemigrations
-python3 manage.py migrate
-6. Start the development server:
- python3 manage.py runserver 0.0.0.0:8000 
-7. Access the application by navigating to `http://localhost:8000` on your web browser.
+7. Start the development server:
+   ```
+   python3 manage.py runserver 0.0.0.0:8000 
+   ```
+8. Open your web browser and navigate to `http://localhost:8000` to access the application.
+
 
 ## How to use 
 
@@ -43,7 +59,9 @@ python3 manage.py migrate
 ## Testing
 
 Run the following command to execute tests:
+```
 python3 manage.py test
+```
 USE
 ---
 1. **Consumers**: Shop and explore products across various brands and categories.
