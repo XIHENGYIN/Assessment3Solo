@@ -1,36 +1,50 @@
 # Shopping
 
-## Project Description
-Shopping is a web application that allows users to register and log in. Once logged in, users can browse through different brands and select categories to see detailed product pages. The application enables users to add products to their cart, view original prices, and see discounted prices in a bar chart format.
+This web application allows users to register and log in to access a variety of brands and their categories, offering a detailed view of products, including options to add them to the cart and view pricing details. Users can explore brands, choose categories, and purchase products with an interface that provides both original and discounted prices.
 
-## Installation Guide
-To set up the project, follow these steps:
+## Features
 
-1. Navigate to the `Assessment3Solo` directory.
-2. Set the Python version by running the command: `pyenv local 3.7.0`
-3. Create a virtual environment: `python3 -m venv .venv`
-4. Activate the virtual environment:
-   ```bash
-   source .venv/bin/activate
+- **User Registration and Login**: Secure access to the application with individual user accounts.
+- **Brand Exploration**: Users can view a list of all available brands.
+- **Category Browsing**: Navigate through different categories within each brand.
+- **Product Details**: Access detailed information about each product, including options to add items to the shopping cart.
+- **Price Visualization**: View original and discounted prices in a bar chart format.
 
-Install dependencies from the following list:
-asgiref==3.8.1
-Django==4.1
-sqlparse==0.5.0
-typing_extensions==4.11.0
+How to start it
+----------------
+1. Clone the repository:
+2. Navigate to the project directory:
+   cd Assessment3Solo
+  
+3. Set the python version and create and activate the virtual environment：
+  
+pyenv local 3.10.7
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
 
-Usage Instructions
-After registration and logging in, users can view a list of brands. Clicking on a brand will show the different categories under it. Selecting a category will display detailed pages of the products within it.
+4. Install Django:
+   pip install Django==4.1.0
 
-Technology Stack
-Django 4.1.0
-Python 3.10.7
-Features List
-User registration and login.
-Browse brands and their categories.
-View detailed product pages with options to add items to the cart.
-Display original and discounted prices in a bar chart.
+5. Generate migration files and apply them:
+python3 manage.py makemigrations
+python3 manage.py migrate
+6. Start the development server:
+ python3 manage.py runserver 0.0.0.0:8000 
+7. Access the application by navigating to `http://localhost:8000` on your web browser.
 
-Running Tests
-Run tests for model.py and view.py using the following command:
-python manage.py test
+## How to use 
+
+- **Homepage**: Browse for an overview of available brands.
+- **Brand Pages**: Click on a brand to see its categories.
+- **Category Pages**: Choose a category to view its products.
+- **Product Pages**: Click on a product for more detailed information, including pricing options.
+
+## Testing
+
+Run the following command to execute tests:
+python3 manage.py test
+USE
+---
+1. **Consumers**: Shop and explore products across various brands and categories.
+2. **Market Analysts**: Study consumer trends and product popularity.
